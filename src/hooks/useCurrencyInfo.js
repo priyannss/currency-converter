@@ -1,0 +1,21 @@
+import { useEffect, useState } from "react";
+
+
+// +++++++++++++++++++++++++ custom hooks ++++++++++++++++++++++++
+function useCurrencyInfo(currency) {
+    const [data, setData] = useState({});
+
+
+    useEffect(()=> {
+        fetch(`https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2024-03-06/v1/currencies/${currency}.json`)
+        .then((response)=> (response.json()))
+        .then((res)=> setData(res[currency]))
+        // console.log(data);
+    }, [currency]); // whenever there will be change of currency this useEffect will run
+
+    // console.log(data);
+    return data;
+}
+
+
+export default useCurrencyInfo;
